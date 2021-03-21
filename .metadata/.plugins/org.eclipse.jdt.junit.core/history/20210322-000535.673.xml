@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="EventTest" project="rest-ap-with-spring" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.demo.events.EventTest" time="0.047" displayname="EventTest" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.events.EventTest]">
+    <testcase name="Builder" classname="com.example.demo.events.EventTest" time="0.047" displayname="Builder()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.events.EventTest]/[method:Builder()]"/>
+  </testsuite>
+</testrun>

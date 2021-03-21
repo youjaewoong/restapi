@@ -1,0 +1,27 @@
+package com.example.demo.events;
+
+import static org.junit.jupiter.*;
+
+import org.junit.jupiter.api.Test;
+
+class EventTest {
+
+	@Test
+	void builder() {
+		Event event = Event.builder()
+				.name("spring rest api")
+				.description("REST API development with Spring")
+				.build();
+		assertThat(event).isNotNull();
+	}
+	
+	@Test
+	void javaBean() {
+		Event event = new Event();
+		event.setName("Event");
+		event.setDescription("Spring");
+		
+		assertThat(event.getName().isEq)
+	}
+
+}

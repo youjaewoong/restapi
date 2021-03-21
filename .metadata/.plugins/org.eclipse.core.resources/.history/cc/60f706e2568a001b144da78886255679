@@ -1,0 +1,21 @@
+package com.example.demo.events;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EventTest {
+
+	@Test
+	void testEvent() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testBuilder() {
+		Event event = Event.builder().build();
+		assertThat(event).isNotNull();
+	}
+
+}
