@@ -4,7 +4,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.net.URI;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,11 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value= "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
 public class EventController {
 
-	@Autowired
-	EventRepository eventRepository;
+	private final EventRepository eventRepository;
+	private final ModelMapper modelMapper;
+	
+	public EventController(EventRepository eventRepository, ModelMapper modelMapper) {
+		this.eventRepository = eventRepository;
+		this.modelMapper = modelMapper;
+	}
 	
 	@PostMapping
-	public ResponseEntity<?> createEvent(@RequestBody Event event) {
+	public ResponseEntity<?> createEvent(@RequestBody EventDto eventDto) {
+		
+		//dto class 를  Event의 객체로 변경요청
+		Event event = modelMapper.map(eventDto, Event.class);
 		
 		//URI createdUri = linkTo(methodOn(EventController.class).createEvent()).slash("{id}").toUri();
 		Event newEvent = this.eventRepository.save(event);
