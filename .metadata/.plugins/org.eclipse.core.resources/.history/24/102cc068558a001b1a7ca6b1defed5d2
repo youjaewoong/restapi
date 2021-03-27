@@ -1,7 +1,0 @@
-package com.example.demo.restapi;
-
-public enum EventStatus {
-
-    DRAFT, PUBLISHED, BEGAN_ENROLLMEND, CLOSED_ENROLLMENT, STARTED, ENDED
-
-}

@@ -35,7 +35,7 @@ class EventControllerTest {
 	ObjectMapper objectMapper;
 	
 	@MockBean
-	EventRepository eventRepository;
+	EventRepository eventRepository; 
 
 	@Test
 	void createEvent() throws Exception {
