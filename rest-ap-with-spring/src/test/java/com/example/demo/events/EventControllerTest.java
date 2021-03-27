@@ -94,9 +94,19 @@ class EventControllerTest {
 		mockMvc.perform(post("/api/events/")
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.accept(MediaTypes.HAL_JSON)
-				.content(objectMapper.writeValueAsString(event)))
+				.content(this.objectMapper.writeValueAsString(event)))
 				.andDo(print())
 				.andExpect(status().isBadRequest()) //201
+		;
+	}
+	
+	@Test
+	void createEvent_Bad_Reuqest_Empoty_Input() throws Exception{
+		EventDto eventDto = EventDto.builder().build();
+		this.mockMvc.perform(post("/api/events")
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content(this.objectMapper.writeValueAsString(eventDto)))
+			.andExpect(status().isBadRequest())
 		;
 	}
 }
