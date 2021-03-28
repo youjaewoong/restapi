@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<!-- <scope>test</scope>  -->
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>

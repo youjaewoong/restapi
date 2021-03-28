@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -46,12 +47,15 @@ public class EventController {
 		//dto class 를  Event의 객체로 변경요청
 		Event event = modelMapper.map(eventDto, Event.class);
 		event.update();
-		
-		//URI createdUri = linkTo(methodOn(EventController.class).createEvent()).slash("{id}").toUri();
 		Event newEvent = this.eventRepository.save(event);
-		URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
-		//return ResponseEntity.created(createdUri).build();
-		event.setId(10);
-		return ResponseEntity.created(createdUri).body(event);
+		
+		WebMvcLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
+		URI createdUri = selfLinkBuilder.toUri();
+		
+		EventResource eventResource = new EventResource(event);
+		eventResource.add(linkTo(EventController.class).withRel("query-events"));
+		eventResource.add(selfLinkBuilder.withRel("update-event"));
+		
+		return ResponseEntity.created(createdUri).body(eventResource);
 	}
 }
