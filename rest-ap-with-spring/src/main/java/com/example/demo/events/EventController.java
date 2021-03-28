@@ -45,6 +45,7 @@ public class EventController {
 		
 		//dto class 를  Event의 객체로 변경요청
 		Event event = modelMapper.map(eventDto, Event.class);
+		event.update();
 		
 		//URI createdUri = linkTo(methodOn(EventController.class).createEvent()).slash("{id}").toUri();
 		Event newEvent = this.eventRepository.save(event);
