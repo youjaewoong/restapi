@@ -152,7 +152,7 @@ class EventControllerTest {
 				.build();
 		
 		mockMvc.perform(post("/api/events/")
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaTypes.HAL_JSON)
 				.content(this.objectMapper.writeValueAsString(event)))
 				.andDo(print())
@@ -165,7 +165,7 @@ class EventControllerTest {
 	void createEvent_Bad_Reuqest_Empoty_Input() throws Exception{
 		EventDto eventDto = EventDto.builder().build();
 		this.mockMvc.perform(post("/api/events")
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(eventDto)))
 			.andExpect(status().isBadRequest())
 		;
@@ -188,13 +188,14 @@ class EventControllerTest {
 				.build();
 		
 		mockMvc.perform(post("/api/events/")
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(eventDto)))
 		  	.andDo(print())
 			.andExpect(status().isBadRequest())
-			.andExpect(jsonPath("$[0].objectName").exists())
-			.andExpect(jsonPath("$[0].defaultMessage").exists())
-			.andExpect(jsonPath("$[0].code").exists())
+			.andExpect(jsonPath("content[0].objectName").exists())
+			.andExpect(jsonPath("content[0].defaultMessage").exists())
+			.andExpect(jsonPath("content[0].code").exists())
+			.andExpect(jsonPath("_links.index").exists())
 		;
 	}
 }

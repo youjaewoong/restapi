@@ -15,7 +15,9 @@ public class ErrorsSerializer extends JsonSerializer<Errors>{
 	@Override
 	public void serialize(Errors errors, JsonGenerator gen, SerializerProvider serializers) throws IOException {
 		// TODO Auto-generated method stub
+		gen.writeFieldName("content");
 		gen.writeStartArray();
+	
 		errors.getFieldErrors().stream().forEach(e ->{
 			try {//fileld message
 				gen.writeStartObject();
@@ -44,6 +46,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors>{
 				e1.printStackTrace();
 			}
 		});
+		gen.writeEndArray();
 		
 	}
 
