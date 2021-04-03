@@ -53,7 +53,7 @@ class EventControllerTest extends BaseControllerTest{
 				.build();
 		
 		mockMvc.perform(post("/api/events/")
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaTypes.HAL_JSON)
 				.content(objectMapper.writeValueAsString(eventDto)))
 		.andDo(print())
@@ -110,9 +110,9 @@ class EventControllerTest extends BaseControllerTest{
 						fieldWithPath("_links.self.href").description("link to self"),
 						fieldWithPath("_links.query-events.href").description("link to query event list"),
 						fieldWithPath("_links.update-event.href").description("link to update existing event"),
-						fieldWithPath("_links.profile.href").description("link to profile an existing event")
+						fieldWithPath("_links.profile.href").description("link to profile an existing event"),
+						fieldWithPath("manager").description("manager price of new event")
 				)
-				
 		))
 		;
 	}
