@@ -23,7 +23,6 @@ public class AppConfig {
 	public ModelMapper modeMapper() {
 		return new ModelMapper();
 	}
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
