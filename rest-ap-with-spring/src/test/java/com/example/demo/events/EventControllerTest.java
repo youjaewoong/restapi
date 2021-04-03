@@ -36,6 +36,7 @@ import com.example.demo.accounts.Account;
 import com.example.demo.accounts.AccountRepository;
 import com.example.demo.accounts.AccountRole;
 import com.example.demo.accounts.AccountService;
+import com.example.demo.common.AppProperties;
 import com.example.demo.common.BaseControllerTest;
 import com.example.demo.common.TestDescription;
 
@@ -50,6 +51,9 @@ class EventControllerTest extends BaseControllerTest{
 	
 	@Autowired
 	AccountRepository accountRepository;
+	
+	@Autowired
+	AppProperties appProperties;
 	
 	@BeforeEach
 	public void setUp() {
@@ -145,22 +149,17 @@ class EventControllerTest extends BaseControllerTest{
 	
 	private String getAccessToken() throws Exception {
 		//Given
-		String username = "gos1004@nate.com";
-		String password = "gos1004";
 		Account gos1004 = Account.builder()
-				.email(username)
-				.password(password)
+				.email(appProperties.getUserUsername())
+				.password(appProperties.getUserPassword())
 				.roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
 				.build();
 		this.accountService.saveAccount(gos1004);
 		
-		String clientId = "myApp";
-		String clientSecret = "pass";
-		
 		ResultActions perform = this.mockMvc.perform(post("/oauth/token")
-			.with(httpBasic(clientId, clientSecret))
-			.param("username", username)
-			.param("password", password)
+			.with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+			.param("username", appProperties.getUserUsername())
+			.param("password", appProperties.getUserPassword())
 			.param("grant_type", "password"));
 		
         var responseBody = perform.andReturn().getResponse().getContentAsString();
