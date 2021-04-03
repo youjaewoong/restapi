@@ -27,8 +27,8 @@ class AuthServerConfigTest extends BaseControllerTest {
 	public void getAuthToken() throws Exception {
 		
 		//Given
-		String username = "keeun@email.com";
-		String password = "keesun";
+		String username = "gos1004@nate.com";
+		String password = "gos1004";
 		Account gos1004 = Account.builder()
 				.email(username)
 				.password(password)
