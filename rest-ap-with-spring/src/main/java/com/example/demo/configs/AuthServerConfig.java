@@ -34,25 +34,25 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	AppProperties appProperties;
 	
 	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.passwordEncoder(passwordEncoder);
-	}
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.passwordEncoder(passwordEncoder);
+    }
 	
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-			.withClient(appProperties.getClientId())
-			.authorizedGrantTypes("password", "refresh_token")
-			.scopes("read", "write")
-			.secret(this.passwordEncoder.encode(appProperties.getClientSecret()))
-			.accessTokenValiditySeconds(10 * 60)
-			.refreshTokenValiditySeconds(6 * 10 * 60);
-	}
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient(appProperties.getClientId())
+                .authorizedGrantTypes("password", "refresh_token")
+                .secret(this.passwordEncoder.encode(appProperties.getClientSecret()))
+                .scopes("read", "write")
+                .accessTokenValiditySeconds(10 * 60)
+                .refreshTokenValiditySeconds(6 * 10 * 60);
+    }
 	
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager)
-			.userDetailsService(accountService)
-			.tokenStore(tokenStore);
-	}
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager)
+                .userDetailsService(accountService)
+                .tokenStore(tokenStore);
+    }
 }

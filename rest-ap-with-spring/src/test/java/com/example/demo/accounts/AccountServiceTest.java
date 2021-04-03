@@ -39,14 +39,16 @@ class AccountServiceTest {
 	@Test
 	public void findByUsername() {
 		// Given
-		String password = "gos1004";
-		String username = "gos1004@nate.com";
+		String password = "admin";
+		String username = "admin@email.com";
+		/*
 		Account account = Account.builder()
 				.email(username)
 				.password(password)
 				.roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
 				.build();
 		this.accountService.saveAccount(account);
+		*/
 		
 		// When
 		UserDetailsService userDetailsService = accountService;
@@ -59,7 +61,7 @@ class AccountServiceTest {
 	@Test
 	public void findByUsernameFail() {
 		
-		String username = "random@email.com";
+		String username = "admin@email.com";
 
 		// Expected
 		expectedException.expect(UsernameNotFoundException.class);
