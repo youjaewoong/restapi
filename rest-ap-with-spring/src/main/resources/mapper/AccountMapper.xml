@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.AccountMapper" >
 
     <select id="getAccount" resultType="com.example.demo.dto.AccountDto">
-        select * from account
+        select * from account t
     </select>
     
 </mapper>

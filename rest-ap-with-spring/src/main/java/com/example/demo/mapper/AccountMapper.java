@@ -6,9 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.dto.AccountDto;
+import com.github.pagehelper.Page;
 
 @Repository
 @Mapper
 public interface AccountMapper {
-	public List<AccountDto> getAccount();
+	public Page<AccountDto> getAccount();
 }

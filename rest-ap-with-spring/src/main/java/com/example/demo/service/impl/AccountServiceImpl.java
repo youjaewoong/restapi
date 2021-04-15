@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.AccountDto;
 import com.example.demo.mapper.AccountMapper;
 import com.example.demo.service.AccountService;
+import com.github.pagehelper.Page;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -16,7 +17,7 @@ public class AccountServiceImpl implements AccountService {
 	private AccountMapper accountMapper;
 	
 	@Override
-	public List<AccountDto> getAccount() {
+	public Page<AccountDto> getAccount() {
 		return accountMapper.getAccount();
 	}
 
